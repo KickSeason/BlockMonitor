@@ -38,9 +38,9 @@ namespace BlockMonitor
             {
                 if (height == Status.BlockCount)
                 {
-                    var msg = $"NEO停止出块，超过{Math.Round((DateTime.Now - Status.Time).TotalMinutes)}分钟未出块";
+                    var msg = $"NEO Testnet is blocked，over {Math.Round((DateTime.Now - Status.Time).TotalMinutes)}min";
                     Console.WriteLine($"{msg}, { DateTime.Now.ToString()}");
-                    Tools.SendMail(msg, "NEO停止出块❗❗❗");
+                    Tools.SendMail(msg, "🆘 NEO Testnet is blocked❗❗❗");
                     Tools.Call();
                     return;
                 }
@@ -49,9 +49,9 @@ namespace BlockMonitor
 
                 if (timeSpan >= 35 && timeSpan < 300)
                 {
-                    var msg = $"NEO出块变慢，最近5分钟平均出块时间为{timeSpan}秒。<br />PS：异常区间：{Status.BlockCount}~{height}。";
+                    var msg = $"NEO Testnet is getting slower, The average time per block of the last 5 minutes is {timeSpan}s。<br />PS：abnormal height：{Status.BlockCount}~{height}。";
                     Console.WriteLine($"{msg.Replace("<br />", "\n")}, { DateTime.Now.ToString()}");
-                    Tools.SendMail(msg, "NEO出块变慢❗");
+                    Tools.SendMail(msg, "⚠️ NEO Testnet is slower❗");
                     Status.BlockCount = height;
                     Status.Time = DateTime.Now;
                 }
